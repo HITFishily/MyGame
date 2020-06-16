@@ -47,7 +47,7 @@ class Page:
 	def OnPressButton2FromFrame1(self):
 		self.frmMain.place_forget()
 
-		tk.Button(self.root, text='按 钮1', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=30,anchor=tk.NW)
+		tk.Button(self.root, text='队 伍', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=30,anchor=tk.NW)
 		tk.Button(self.root, text='按 钮2', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=110,anchor=tk.NW)
 		tk.Button(self.root, text='按 钮3', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=190,anchor=tk.NW)
 		tk.Button(self.root, text='按 钮4', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=270,anchor=tk.NW)
