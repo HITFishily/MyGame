@@ -1,9 +1,12 @@
 # -*-coding:utf-8-*-
 from threading import Timer
 import time
-def print_name(str):
+
+def xx():
+    print("xx")
+
+def print_name(str, cb):
     print("i'm %s"%str)
-t = Timer(5,print_name,("superman",))
+    xx()
+t = Timer(5,print_name,("superman",xx))
 t.start()
-time.sleep(3)
-t.cancel()

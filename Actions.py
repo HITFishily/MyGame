@@ -4,9 +4,8 @@ class CActions():
 	def __init__(self, DbConn):
 		self.DbCon = DbConn
 
-	def DoRock():
-		self.DbCon.execute("UPDATE MainCharacter SET Level=?, LevelMax=?, Exp=?, NextExp=?, TotalExp=? WHERE Name=?",
-			(self.Level, self.LevelMax, self.Exp, self.NextExp, self.TotalExp, self.Name))
+	def DoRock(self):
+		pass
 
 
 if __name__ == "__main__":
