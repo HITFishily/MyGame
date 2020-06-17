@@ -20,18 +20,20 @@ class Page:
 		self.file = open(r"color.txt", "r", encoding = 'utf-8')
 		self.DB   = simpleToolSql("Dta")
 		self.MC   = CMainCharacter(self.DB) 
-		self.text_font	 = font.Font(family='经典隶变简', size=12, weight='normal')
-		self.button_font = font.Font(family='经典隶变简', size=16, weight='bold')
-
+		self.text_font	 		= font.Font(family='经典隶变简', size=12, weight='normal')
+		self.button_font 		= font.Font(family='经典隶变简', size=16, weight='bold')
+		self.little_button_font = font.Font(family='经典隶变简', size = 13, weight='bold')
+		
 		tk.Label (self.frmMain, text='Title1').place(in_=self.frmMain, x=50, y=50,anchor=tk.NW)
-		tk.Button(self.frmMain, text='New', height = 2, width = 10).place(in_=self.frmMain, x=600, y=400,anchor=tk.NW)
-		tk.Button(self.frmMain, text='Continue', height = 2, width = 10, command=self.OnPressButton2FromFrame1).place(in_=self.frmMain, x=600, y=450,anchor=tk.NW)
-		tk.Button(self.frmMain, text='Exit', height = 2, width = 10, command=self.OnPressButton3FormFrame1).place(in_=self.frmMain, x=600, y=500,anchor=tk.NW)
+		tk.Button(self.frmMain, text='开 始', height = 2, width = 10).place(in_=self.frmMain, x=600, y=400,anchor=tk.NW)
+		tk.Button(self.frmMain, text='继 续', height = 2, width = 10, command=self.OnPressButton2FromFrame1).place(in_=self.frmMain, x=600, y=450,anchor=tk.NW)
+		tk.Button(self.frmMain, text='退 出', height = 2, width = 10, command=self.OnPressButton3FormFrame1).place(in_=self.frmMain, x=600, y=500,anchor=tk.NW)
 		self.frmMain.config(height=600, width=800)
 		
-		tk.Button(self.frm2, text='Readline', height = 2, width = 10, command=self.OnPressButton2FromFrame2).place(in_=self.frm2, x=200, y=250,anchor=tk.CENTER)
-		tk.Button(self.frm2, text='Work', height = 2, width = 10, command=self.OnPressButton3FromFrame2).place(in_=self.frm2, x=300, y=250,anchor=tk.CENTER)
-		tk.Button(self.frm2, text='Save', height = 2, width = 10, command=self.OnPressButton4FromFrame2).place(in_=self.frm2, x=400, y=250,anchor=tk.CENTER)
+		tk.Button(self.frm2, text='表 格', height = 2, width = 10, command=self.OnPressButton2FromFrame2, font = self.little_button_font).place(in_=self.frm2, x=60, y=360,anchor=tk.CENTER)
+		tk.Button(self.frm2, text='工 作', height = 2, width = 10, command=self.OnPressButton2FromFrame2, font = self.little_button_font).place(in_=self.frm2, x=205, y=360,anchor=tk.CENTER)
+		tk.Button(self.frm2, text='确 认', height = 2, width = 10, command=self.OnPressButton3FromFrame2, font = self.little_button_font).place(in_=self.frm2, x=345, y=360,anchor=tk.CENTER)
+		tk.Button(self.frm2, text='取 消', height = 2, width = 10, command=self.OnSave, font = self.little_button_font).place(in_=self.frm2, x=490, y=360,anchor=tk.CENTER)
 		self.frm2.config(height=600, width=600)
 		self.text = ScrolledText(self.root, height=10, width=70, font = self.text_font, cursor='arrow', bg='Silver', exportselection='false')
 		
@@ -45,14 +47,14 @@ class Page:
 		self.text.config(state="disabled")	
 
 	def OnPressButton2FromFrame1(self):
-		self.frmMain.place_forget()
+		#self.frmMain.place_forget()
 
-		tk.Button(self.root, text='队 伍', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=30,anchor=tk.NW)
+		tk.Button(self.root, text='职 员', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=30,anchor=tk.NW)
 		tk.Button(self.root, text='按 钮2', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=110,anchor=tk.NW)
 		tk.Button(self.root, text='按 钮3', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=190,anchor=tk.NW)
 		tk.Button(self.root, text='按 钮4', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=270,anchor=tk.NW)
 		tk.Button(self.root, text='按 钮5', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=350,anchor=tk.NW)
-		tk.Button(self.root, text='按 钮6', height = 2, width = 10, font = self.button_font).place(in_=self.root, x=30, y=430,anchor=tk.NW)
+		tk.Button(self.root, text='保 存', height = 2, width = 10, font = self.button_font, command = self.OnSave).place(in_=self.root, x=30, y=430,anchor=tk.NW)
 		tk.Button(self.root, text='退 出', height = 2, width = 10, font = self.button_font, command = self.OnPressButton3FormFrame1).place(in_=self.root, x=30, y=510,anchor=tk.NW)
 
 		self.frm2.place(x=200, y=0, anchor=tk.NW)
@@ -83,11 +85,12 @@ class Page:
 		else:
 			self.PrintOnSrceen("get 13 exp!\n")
 
-	def OnPressButton4FromFrame2(self):
+	def OnSave(self):
+		self.PrintOnSrceen('进行了保存.')
 		self.MC.UpdateDB()
 
 if __name__ == '__main__':
 	root = tk.Tk()
 	p = Page(root)
-	p.MainPage()
+	p.OnPressButton2FromFrame1()
 	tk.mainloop()
